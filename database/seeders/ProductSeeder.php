@@ -34,13 +34,5 @@ class ProductSeeder extends Seeder
                 $categories->random(2)->pluck('id')->toArray()
             );
         });
-
-        $orders = Order::all();
-        Product::all()->each(function ($product) use ($orders) {
-            $orderIds = $orders->random(3)->pluck('id')->toArray();
-            foreach($orderIds as $orderId) {
-                $product->orders()->attach($orderId, ['quantity' => rand(1, 5)]);
-            }
-        });
     }
 }
